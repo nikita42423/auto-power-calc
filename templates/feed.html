@@ -27,23 +27,23 @@
                 </video>
                 <div class="info-overlay">
                     <div class="info-side">
-                        <p class="description-full">Мощность {{ device.power }} Вт<br>Сопротивление {{ device.resistance }} Ом</p>
+                        <p class="description-text">Мощность {{ device.power }} Вт<br>Сопротивление {{ device.resistance }} Ом</p>
                         <div class="like-next">
                             <a class="btn-like-next">👍<br>{{ device.like_count }}</a>
                             <a href="/feed/{{ device.id }}?next=true" class="btn-like-next">➜</a>
                         </div>
                     </div>
-                    <div class="description-full">
-                        <p><strong>{{ device.name | truncate(30, True) }}</strong></p>
+                    <div class="description-text">
+                        <p class="description-title">{{ device.name | truncate(30, True) }}</p>
                         <p>{{ device.description | truncate(40, True) }}</p>
                         <p>Показать полностью ▼</p>
                     </div>
                 </div>
             </div>
             <div class="tab-bar">
-                <div class="tab-feed tab-active">📱<br>Лента</div>
-                <a href="/add" class="tab-add">📝<br>Добавление</a>
-                <a href="/grid" class="tab-grid">📊<br>Плитка</a>
+                <div class="tab-btn tab-active">📱<br>Лента</div>
+                <a href="/add" class="tab-btn">📝<br>Добавление</a>
+                <a href="/grid" class="tab-btn">📊<br>Плитка</a>
             </div>
             <div class="home-indicator">
                 <div class="indicator-line"></div>

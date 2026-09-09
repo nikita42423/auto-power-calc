@@ -35,8 +35,8 @@
                             <img src="{{ device.image_url }}" alt="{{ device.name }}" class="card-image">
                         </div>
                         <div class="card-body">
-                            <p><strong>{{ device.power }} Вт | {{ device.resistance }} Ом</strong></p>
-                            <p class="">{{ device.name }}</p>
+                            <p class="description-title">{{ device.power }} Вт | {{ device.resistance }} Ом</p>
+                            <p>{{ device.name }}</p>
                             <p style="margin-top: auto;">👍 {{ device.like_count }}</p>
                         </div>
                     </a>
@@ -44,9 +44,9 @@
                 </div>
             </div>
             <div class="tab-bar">
-                <a href="/feed"  class="tab-feed">📱<br>Лента</a>
-                <a href="/add" class="tab-add">📝<br>Добавление</a>
-                <div class="tab-grid tab-active">📊<br>Плитка</div>
+                <a href="/feed"  class="tab-btn">📱<br>Лента</a>
+                <a href="/add" class="tab-btn">📝<br>Добавление</a>
+                <div class="tab-btn tab-active">📊<br>Плитка</div>
             </div>
             <div class="home-indicator">
                 <div class="indicator-line"></div>

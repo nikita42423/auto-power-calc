@@ -1,10 +1,23 @@
 /*
-whitesmoke  | акцент бело-серый     |   #f5f5f5
-gray        | акцент серый          |   #808080
-dodgerblue  | акцент сине-голубой   |   #1e90ff
+акцент бело-серый |   #f5f5f5
+акцент серый      |   #808080
+акцент красный    |   #ED1D24
+
+заголовок 16px
+текст 14px
+
+форма карточек:
+- тень: 0 4px 12px rgba(0, 0, 0, 0.1);
+- радиус угла: 10px
+
+hover: при наведении курсора цвет фона rgba(237, 29, 36, 0.2)
 */
+
+/* Шрифт */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family:'Noto Sans';
     background-color: lightsteelblue;
     min-height: 100vh;
     display: flex;
@@ -17,11 +30,16 @@ body {
 p {
     margin: 0px;
     padding: 0px;
+    font-size: 14px;
 }
 
 a {
     text-decoration: none;
     color: black;
+}
+
+input {
+    font-size: 14px;
 }
 
 .main-grid {
@@ -86,6 +104,10 @@ a {
     margin: 5px;
 }
 
+.card:hover {
+    background-color: rgba(237, 29, 36, 0.2);
+}
+
 .card-head {
     height: 100px;
     padding: 10px;
@@ -114,7 +136,7 @@ a {
     padding-block: 8px;
 }
 
-.tab-feed, .tab-add, .tab-grid {
+.tab-btn {
     display: flex;
     flex: 1;
     justify-content: center;
@@ -124,10 +146,15 @@ a {
     color: #808080;
 }
 
+.tab-btn:hover {
+    background-color: rgba(237, 29, 36, 0.2);
+    border-radius: 16px;
+}
+
 .tab-active {
     font-weight: bold;
-    color: #1e90ff;
-    background-color: #f5f5f5;
+    color: #ED1D24;
+    background-color: #f5f5f5 !important;
     border-radius: 16px;
 }
 
@@ -182,12 +209,11 @@ a {
 }
 
 .description-title {
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    padding: 8px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
-.description-full {
+.description-text {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -204,7 +230,7 @@ a {
     text-align: center;
     flex: 1;
     color: white;
-    background-color: #1e90ff;
+    background-color: #ED1D24;
     border: none;
     border-radius: 16px;
     padding: 10px;
@@ -248,7 +274,7 @@ a {
 
 .add-section input,
 .add-section textarea {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family:'Noto Sans';
     background-color: #f5f5f5;
     border-radius: 16px;
     padding: 10px;
