@@ -24,10 +24,13 @@
             <div class="content-area">
                 <h2>Каталог устройств</h2>
                 <form class="search" method="GET" action="/grid">
-                    <input class="field-search" type="number"  name="power" value="{{ power_filter }}" placeholder="Мощность <= (например, 100)" />
+                    <div class="slider-block">
+                        <input type="range" name="power_min" class="range-slider" min="0" max="1000" step="10" value="{{ power_min }}" />
+                        <input type="range" name="power_max" class="range-slider" min="0" max="1000" step="10" value="{{ power_max }}" />
+                    </div>
                     <button class="btn" style="width: 100px; flex: none;">🔎 Найти</button>
                 </form>
-
+                <p>Результат поиска: от {{ power_min }} до {{ power_max }} Вт</p>
                 <div class="cards">
                 {% for device in devices %}
                     <a href="/feed/{{ device.id }}" class="card">

@@ -8,16 +8,18 @@ router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
 @router.get("/grid")
-def get_devices(request: Request, power: str = Query(None)):
+def get_devices(request: Request, power_min: int = Query(None), power_max: int = Query(None)):
     devices = [{**d, "like_count": len(d["likes"])} for d in devices_db if d["status"] == "опубликован"]
 
-    if power and power.isdigit():
-        devices = [d for d in devices if d["power"] <= int(power)]
+    if power_min is not None:
+        devices = [d for d in devices if d["power"] >= power_min]
+    if power_max is not None:
+        devices = [d for d in devices if d["power"] <= power_max]
 
     return templates.TemplateResponse(
         request=request,
         name="grid.html",
-        context={"devices": devices, "power_filter": power}
+        context={"devices": devices, "power_min": power_min or 0, "power_max": power_max or 2000}
     )
 
 @router.get("/feed")

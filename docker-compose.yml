@@ -16,8 +16,9 @@ services:
 volumes:
   minio-data:
 
-# Запуск MiniO
+# Запуск MinIO
 # docker run -d --name minio_storage -p 9000:9000 -p 9001:9001 -e MINIO_ROOT_USER=root -e MINIO_ROOT_PASSWORD=rootpassword -v minio_data:/data minio/minio server /data --console-address ":9001"
 # docker exec -it minio_storage mc alias set myminio http://localhost:9000 root rootpassword
-# docker exec -it minio_storage mc mb myminio/auto-power-calc
-# docker exec -it minio_storage mc anonymous set public myminio/auto-power-calc
+# docker exec -it minio_storage mc mb myminio/media
+# docker exec -it minio_storage mc anonymous set public myminio/media
+# docker cp cover-1.png minio_storage:/tmp/ && docker exec minio_storage mc cp /tmp/cover-1.png myminio/media/cover-1.png
