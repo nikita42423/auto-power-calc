@@ -1,0 +1,364 @@
+/*
+акцент бело-серый |   #f5f5f5
+акцент серый      |   #808080
+акцент красный    |   #ED1D24
+
+заголовок 16px
+текст 14px
+
+форма карточек:
+- тень: 0 4px 12px rgba(0, 0, 0, 0.1);
+- радиус угла: 10px
+
+hover: при наведении курсора цвет фона rgba(237, 29, 36, 0.2)
+*/
+
+/* Шрифт */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family:'Noto Sans';
+    background-color: lightsteelblue;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+p {
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+input {
+    font-size: 14px;
+}
+
+.main-grid {
+    width: 402px;
+    height: 870px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 32px;
+}
+
+.status-bar {
+    width: auto;
+    height: 44px;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 24px;
+}
+
+.content-area {
+    width: auto;
+    min-height: 0;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+    border-block: 2px solid;
+    border-color: #f5f5f5;
+    padding-inline: 16px;
+}
+
+.search {
+    display: flex;
+    gap: 10px;
+}
+
+.field-search {
+    flex: 1;
+    height: 20px;
+    color: #808080;
+    background-color: #f5f5f5;
+    border-radius: 16px;
+    padding: 10px;
+    border: none;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow-y: auto;
+    scrollbar-width: none;
+    padding-block: 10px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 5px;
+}
+
+.card:hover {
+    background-color: rgba(237, 29, 36, 0.2);
+}
+
+.card-head {
+    height: 100px;
+    padding: 10px;
+}
+
+.card-image {
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 8px;
+}
+
+.tab-bar {
+    width: auto;
+    height: 44px;
+    display: flex;
+    flex-shrink: 0;
+    gap: 16px;
+    padding-inline: 16px;
+    padding-block: 8px;
+}
+
+.tab-btn {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    color: #808080;
+}
+
+.tab-btn:hover {
+    background-color: rgba(237, 29, 36, 0.2);
+    border-radius: 16px;
+}
+
+.tab-active {
+    font-weight: bold;
+    color: #ED1D24;
+    background-color: #f5f5f5 !important;
+    border-radius: 16px;
+}
+
+.home-indicator {
+    width: auto;
+    height: 34px;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.indicator-line {
+    width: 134px;
+    height: 5px;
+    background-color: black;
+    border-radius: 3px;
+}
+
+/* Лента */
+.video-layout {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: end;
+    gap: 20px;
+    padding: 16px;
+}
+
+.info-side {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    gap: 16px;
+}
+
+.like-next {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.description-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.description-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgba(245, 245, 245, 0.2);
+    color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    border-radius: 16px;
+    padding: 8px;
+}
+
+.btn {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+    color: white;
+    background-color: #ED1D24;
+    border: none;
+    border-radius: 16px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.btn-like-next {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    background-color: rgba(245, 245, 245, 0.2);
+    border: 1px solid white;
+    border-radius: 50%;
+    padding: 0px;
+}
+
+.add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.add-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.add-section label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #808080;
+}
+
+.add-section input,
+.add-section textarea {
+    font-family:'Noto Sans';
+    background-color: #f5f5f5;
+    border-radius: 16px;
+    padding: 10px;
+    border: none;
+}
+
+.add-section .drop-zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 2px dashed #808080;
+    border-radius: 16px;
+    color: #808080;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+}
+
+.add-section .drop-zone input {
+    display: none;
+}
+
+.slider-block {
+    position: relative;
+    display: flex;
+    flex: 1;
+}
+
+.range-slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+}
+
+.range-slider::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(237, 29, 36, 0.1);
+}
+
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    margin-top: -7px;
+    border-radius: 50%;
+    background: #ED1D24;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Превью файлов в добавлении */
+.file-preview {
+    margin-top: 4px;
+}
+
+.file-preview img,
+.file-preview video {
+    width: 100%;
+    max-height: 140px;
+    object-fit: contain;
+    background-color: #000;
+    border-radius: 16px;
+}
