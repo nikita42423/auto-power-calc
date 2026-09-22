@@ -6,19 +6,35 @@ services:
       - "9000:9000"
       - "9001:9001"
     environment:
-      MINIO_ROOT_USER: root
-      MINIO_ROOT_PASSWORD: rootpassword
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: passadmin
       MINIO_CONSOLE_ADDRESS: ":9001"
     volumes:
       - minio-data:/data
     command: server /data --console-address ":9001"
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: devices_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
 
 volumes:
   minio-data:
+  postgres_data:
 
 # Запуск MinIO
-# docker run -d --name minio_storage -p 9000:9000 -p 9001:9001 -e MINIO_ROOT_USER=root -e MINIO_ROOT_PASSWORD=rootpassword -v minio_data:/data minio/minio server /data --console-address ":9001"
-# docker exec -it minio_storage mc alias set myminio http://localhost:9000 root rootpassword
-# docker exec -it minio_storage mc mb myminio/media
-# docker exec -it minio_storage mc anonymous set public myminio/media
-# docker cp cover-1.png minio_storage:/tmp/ && docker exec minio_storage mc cp /tmp/cover-1.png myminio/media/cover-1.png
+# docker exec -it minio_storage mc alias set myminio http://localhost:9000 admin passadmin
+# docker exec -it minio_storage mc mb myminio/auto-power-calc
+# docker exec -it minio_storage mc anonymous set public myminio/auto-power-calc
