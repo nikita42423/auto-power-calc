@@ -99,4 +99,16 @@ devices_db = [
         "likes": ["u1","u2","u3","u6","u7","u8","u9","u10",],
         "status": "опубликован",
     },
+    {
+        "id": 9,
+        "name": "Автомобильная высокочастотная акустическая система",
+        "power": 160,
+        "resistance": 4,
+        "description": "Мощная ферритовая магнитная система. Экстремальный уровень громкости в рабочем диапазоне частот. Титановый излучатель. Мощная звуковая катушка 2",
+        "image_url": "https://ural-auto.ru/upload/resize_cache/iblock/c2e/800_800_1/a65v7rbrft0yt9mpubzqnvwsl1ftzqv6.webp",
+        "video_url": "",
+        "real_url": "https://ural-auto.ru/catalog/dinamiki/gromko/ultimatum-as-ut50/",
+        "likes": [],
+        "status": "черновик",
+    },
 ]

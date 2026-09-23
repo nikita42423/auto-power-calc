@@ -25,24 +25,36 @@
                 <h2>Каталог устройств</h2>
                 <form class="search" method="GET" action="/grid">
                     <div class="slider-block">
-                        <input type="range" name="power_min" class="range-slider" min="0" max="1000" step="10" value="{{ power_min }}" />
-                        <input type="range" name="power_max" class="range-slider" min="0" max="1000" step="10" value="{{ power_max }}" />
+                        <div class="slider-values">
+                            <span id="val-min">{{ power_min }}</span>
+                            <span id="val-max">{{ power_max }}</span>
+                        </div>
+                        <input id="sMin" type="range" name="power_min" class="range-slider" min="0" max="1000" step="10" value="{{ power_min }}" />
+                        <input id="sMax" type="range" name="power_max" class="range-slider" min="0" max="1000" step="10" value="{{ power_max }}" />
                     </div>
                     <button class="btn" style="width: 100px; flex: none;">🔎 Найти</button>
                 </form>
                 <p>Результат поиска: от {{ power_min }} до {{ power_max }} Вт</p>
                 <div class="cards">
                 {% for device in devices %}
-                    <a href="/feed/{{ device.id }}" class="card">
-                        <div class="card-head">
+                    <div class="card">
+                        <a href="/feed/{{ device.id_device }}" class="card-head">
                             <img src="{{ device.image_url }}" alt="{{ device.name }}" class="card-image">
-                        </div>
+                        </a>
                         <div class="card-body">
-                            <p class="description-title">{{ device.power }} Вт | {{ device.resistance }} Ом</p>
+                            <p class="description-title">{{ device.power | fmt_num }} Вт | {{ device.resistance | fmt_num }} Ом</p>
                             <p>{{ device.name }}</p>
-                            <p style="margin-top: auto;">👍 {{ device.like_count }}</p>
+                            <div class="like-delete">
+                                <p class="btn-like">
+                                    <span class="btn-like-icon">👍</span>
+                                    <span class="btn-like-count">{{ like_counts.get(device.id_device, 0) }}</span>
+                                </p>
+                                <form action="/device/{{ device.id_device }}/delete" method="POST">
+                                    <button type="submit" class="btn btn-delete">Удалить</button>
+                                </form>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                 {% endfor %}
                 </div>
             </div>
@@ -55,6 +67,16 @@
                 <div class="indicator-line"></div>
             </div>
         </main>
-
+    <script>
+    const sMin = document.getElementById('sMin'), sMax = document.getElementById('sMax');
+    const vMin = document.getElementById('val-min'), vMax = document.getElementById('val-max');
+    function sync() {
+        if (+sMin.value > +sMax.value) [sMin.value, sMax.value] = [sMax.value, sMin.value];
+        vMin.textContent = sMin.value;
+        vMax.textContent = sMax.value;
+    }
+    sMin.addEventListener('input', sync);
+    sMax.addEventListener('input', sync);
+    </script>
     </body>
 </html>

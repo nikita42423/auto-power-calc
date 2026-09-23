@@ -10,7 +10,7 @@ from db.base import Base
 # Импортируйте здесь все ваши модели, чтобы Alembic их увидел!
 from models.device import Device
 from models.user import User
-from models.application import Applications
+from models.like import Applications
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)

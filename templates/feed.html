@@ -23,14 +23,14 @@
             </div>
             <div class="content-area" style="padding: 0px; position: relative;">
                 <video class="video-layout" autoplay loop muted playsinline>
-                    <source src="{{ device.video_url }}" type="video/mp4">
+                    <source src="{{ device.video_url or DEFAULT_VIDEO }}" type="video/mp4">
                 </video>
                 <div class="info-overlay">
                     <div class="info-side">
-                        <p class="description-text">Мощность {{ device.power }} Вт<br>Сопротивление {{ device.resistance }} Ом</p>
+                        <p class="description-text">Мощность {{ device.power | fmt_num }} Вт<br>Сопротивление {{ device.resistance | fmt_num }} Ом</p>
                         <div class="like-next">
-                            <a class="btn-like-next">👍<br>{{ device.like_count }}</a>
-                            <a href="/feed/{{ device.id }}?next=true" class="btn-like-next">➜</a>
+                            <a class="btn-like-next">👍<br>{{ like_count }}</a>
+                            <a href="/feed/{{ device.id_device }}?next=true" class="btn-like-next">➜</a>
                         </div>
                     </div>
                     <div class="description-text">

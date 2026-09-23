@@ -23,28 +23,37 @@
             </div>
             <div class="content-area">
                 <h2>Новое устройство</h2>
-                <form class="add-form">
+                {% if has_draft %}
+                <form action="/publish" method="POST" class="add-form">
+                    <div class="add-section">
+                        <p>Мощность (Вт)</p>
+                        <input type="number" name="power" value="{{ device.power | fmt_num }}" placeholder="Мощность">
+                        <p>Сопротивление (Ом)</p>
+                        <input type="number" name="resistance" value="{{ device.resistance | fmt_num }}" placeholder="Сопротивление">
+                        <p>Описание</p>
+                        <textarea name="description" rows="4" placeholder="Описание">{{ device.description }}</textarea>
+                    </div>
+                    <button type="submit" class="btn">Опубликовать</button>
+                </form>
+                {% else %}
+                <form action="/add" method="POST" class="add-form">
                     <div class="add-section">
                         <label class="drop-zone">
-                            <input type="file" name="image_url" accept="image/*">
+                            <input type="file" accept="image/*">
                             <span>📷<br>Изображение</span>
                         </label>
                         <label class="drop-zone">
-                            <input type="file" name="video_url" accept="video/*">
+                            <input type="file" accept="video/*">
                             <span>🎥<br>Видео</span>
                         </label>
                     </div>
                     <div class="add-section">
                         <p>Название</p>
                         <input type="text" name="name" value="{{ device.name }}" placeholder="Название устройства">
-                        <p>Мощность (Вт)</p>
-                        <input type="number" name="power" value="{{ device.power }}" placeholder="Мощность">
-                        <p>Сопротивление (Ом)</p>
-                        <input type="number" name="resistance" value="{{ device.resistance }}" placeholder="Сопротивление">
-                        <p>Описание</p>
-                        <textarea name="description" rows="4" placeholder="Описание">{{ device.description }}</textarea>
                     </div>
+                    <button type="submit" class="btn">Далее</button>
                 </form>
+                {% endif %}
             </div>
             <div class="tab-bar">
                 <a href="/feed" class="tab-btn">📱<br>Лента</a>
@@ -55,5 +64,21 @@
                 <div class="indicator-line"></div>
             </div>
         </main>
+    <script>
+    document.querySelectorAll('.drop-zone input[type="file"]').forEach(input => {
+        input.addEventListener('change', e => {
+            const label = e.target.closest('label');
+            const url = URL.createObjectURL(e.target.files[0]);
+            const tag = e.target.accept.startsWith('video') ? 'video' : 'img';
+            const el = document.createElement(tag);
+            el.src = url;
+            if (tag === 'video') el.autoplay = el.loop = el.muted = true;
+            Object.assign(el.style, {maxHeight:'200px',width:'auto',objectFit:'contain',borderRadius:'inherit'});
+            label.querySelector('span').style.display = 'none';
+            const old = label.querySelector('img,video'); if(old) old.remove();
+            label.appendChild(el);
+        });
+    });
+    </script>
     </body>
 </html>

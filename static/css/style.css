@@ -104,13 +104,13 @@ input {
     margin: 5px;
 }
 
-.card:hover {
-    background-color: rgba(237, 29, 36, 0.2);
-}
-
 .card-head {
     height: 100px;
     padding: 10px;
+}
+
+.card-head:hover {
+    background-color: rgba(237, 29, 36, 0.2);
 }
 
 .card-image {
@@ -208,6 +208,13 @@ input {
     gap: 16px;
 }
 
+.like-delete {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 8px;
+}
+
 .description-title {
     font-size: 16px;
     font-weight: bold;
@@ -252,6 +259,37 @@ input {
     border: 1px solid white;
     border-radius: 50%;
     padding: 0px;
+}
+
+.btn-delete {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.btn-like {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ED1D24;
+    border-radius: 50%;
+    padding: 4px;
+    box-sizing: border-box;
+    font-size: 10px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.btn-like-icon {
+    display: inline-block;
+    line-height: 1;
+    font-size: 12px;
+}
+
+.btn-like-count {
+    display: inline-block;
+    line-height: 1;
 }
 
 .add-form {
@@ -304,6 +342,15 @@ input {
     position: relative;
     display: flex;
     flex: 1;
+    flex-direction: column;
+}
+
+.slider-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px;
 }
 
 .range-slider {
