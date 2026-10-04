@@ -25,47 +25,6 @@ templates.env.filters["fmt_num"] = fmt_num
 
 CURRENT_USER_ID = 1
 
-@router.get("/grid")
-async def get_devices(
-    request: Request,
-    power_min: int | None = Query(None),
-    power_max: int | None = Query(None),
-    db: AsyncSession = Depends(get_db)
-):
-    stmt = (
-        select(Device)
-        .where(Device.status == "опубликован")
-    )
-
-    if power_min is not None:
-        stmt = stmt.where(Device.power >= power_min)
-    if power_max is not None:
-        stmt = stmt.where(Device.power <= power_max)
-
-    result = await db.execute(stmt)
-    devices = result.scalars().all()
-
-    if devices:
-        ids = [d.id_device for d in devices]
-        counts_result = await db.execute(
-            select(Like.id_device, func.count())
-            .where(Like.id_device.in_(ids))
-            .group_by(Like.id_device)
-        )
-        like_counts = dict(counts_result.all())
-    else:
-        like_counts = {}
-
-    return templates.TemplateResponse(
-        request=request,
-        name="grid.html",
-        context={
-            "devices": devices,
-            "like_counts": like_counts,
-            "power_min": power_min or 0,
-            "power_max": power_max or 2000,
-        }
-    )
 
 @router.get("/feed")
 @router.get("/feed/{id_device}")
@@ -146,6 +105,48 @@ async def get_add(
             "device": device,
             "has_draft": device is not None,
         },
+    )
+
+@router.get("/grid")
+async def get_devices(
+    request: Request,
+    power_min: int | None = Query(None),
+    power_max: int | None = Query(None),
+    db: AsyncSession = Depends(get_db)
+):
+    stmt = (
+        select(Device)
+        .where(Device.status == "опубликован")
+    )
+
+    if power_min is not None:
+        stmt = stmt.where(Device.power >= power_min)
+    if power_max is not None:
+        stmt = stmt.where(Device.power <= power_max)
+
+    result = await db.execute(stmt)
+    devices = result.scalars().all()
+
+    if devices:
+        ids = [d.id_device for d in devices]
+        counts_result = await db.execute(
+            select(Like.id_device, func.count())
+            .where(Like.id_device.in_(ids))
+            .group_by(Like.id_device)
+        )
+        like_counts = dict(counts_result.all())
+    else:
+        like_counts = {}
+
+    return templates.TemplateResponse(
+        request=request,
+        name="grid.html",
+        context={
+            "devices": devices,
+            "like_counts": like_counts,
+            "power_min": power_min or 0,
+            "power_max": power_max or 2000,
+        }
     )
 
 @router.post("/add")
