@@ -1,12 +1,16 @@
 from fastapi import FastAPI
 import uvicorn
 from api.handlers import router
+from api.device import router as device_router
+from api.user import router as user_router
 from fastapi.staticfiles import StaticFiles
 
 
 app = FastAPI(title="Калькулятор тока для автомобильных устройств")
 
 app.include_router(router)
+app.include_router(device_router)
+app.include_router(user_router)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

@@ -1,9 +1,10 @@
 from datetime import datetime
 from decimal import Decimal
 
-from fastapi import APIRouter, Request, Query, Depends, Form
+from fastapi import FastAPI, APIRouter, Request, Query, Depends, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 from sqlalchemy import select, func, text
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -166,8 +167,8 @@ async def post_add(
 
     device = Device(
         name=name,
-        image_url="http://localhost:9000/auto-power-calc/default.png",
-        video_url="http://localhost:9000/auto-power-calc/default.mp4",
+        image_url="/static/img/default.png",
+        video_url="/static/video/default.mp4",
         power=None,
         resistance=None,
         description=None,

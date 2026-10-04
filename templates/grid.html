@@ -39,7 +39,7 @@
                 {% for device in devices %}
                     <div class="card">
                         <a href="/feed/{{ device.id_device }}" class="card-head">
-                            <img src="{{ device.image_url }}" alt="{{ device.name }}" class="card-image">
+                            <img src="{{ device.image_url or '/static/img/default.png' }}" alt="{{ device.name }}" class="card-image">
                         </a>
                         <div class="card-body">
                             <p class="description-title">{{ device.power | fmt_num }} Вт | {{ device.resistance | fmt_num }} Ом</p>

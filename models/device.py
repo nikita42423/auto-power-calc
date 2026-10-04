@@ -15,3 +15,4 @@ class Device(Base):
     date_created = Column(DateTime, nullable=False)
     id_user = Column(Integer, ForeignKey("users.id_user"), nullable=False)
     date_formed = Column(DateTime, nullable=True)
+    date_completed = Column(DateTime, nullable=True)
