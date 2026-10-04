@@ -44,7 +44,7 @@ input {
 
 .main-grid {
     width: 402px;
-    height: 870px;
+    height: min(870px, 100dvh);
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -245,8 +245,8 @@ input {
 }
 
 .btn-like-next {
-    width: 50px;
-    height: 50px;
+    width: 64px;
+    height: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -255,7 +255,7 @@ input {
     font-weight: bold;
     color: white;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-    background-color: rgba(245, 245, 245, 0.2);
+    background-color: rgba(245, 245, 245, 0.4);
     border: 1px solid white;
     border-radius: 50%;
     padding: 0px;
