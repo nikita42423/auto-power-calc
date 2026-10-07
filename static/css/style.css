@@ -198,7 +198,6 @@ input {
     display: flex;
     flex-direction: column;
     align-items: end;
-
     gap: 16px;
 }
 
@@ -208,11 +207,38 @@ input {
     gap: 16px;
 }
 
-.like-delete {
+.device-specs {
     display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 8px;
+}
+
+.chip {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 16px;
-    padding-top: 8px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+    background-color: rgba(245, 245, 245, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(245, 245, 245, 0.5);
+    border-radius: 50%;
+    padding: 0;
+}
+
+.btn-like-next {
+    cursor: pointer;
+}
+
+.btn-like-next:hover {
+    background-color: rgba(245, 245, 245, 0.5);
 }
 
 .description-title {
@@ -227,8 +253,20 @@ input {
     background-color: rgba(245, 245, 245, 0.2);
     color: white;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(245, 245, 245, 0.5);
     border-radius: 16px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     padding: 8px;
+}
+
+.like-delete {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: stretch;
+    gap: 16px;
+    padding-top: 8px;
+    box-sizing: border-box;
 }
 
 .btn {
@@ -237,59 +275,34 @@ input {
     text-align: center;
     flex: 1;
     color: white;
-    background-color: #ED1D24;
+    background-color: #ed1d24;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
     border: none;
     border-radius: 16px;
     padding: 10px;
     cursor: pointer;
 }
 
-.btn-like-next {
-    width: 64px;
-    height: 64px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-    background-color: rgba(245, 245, 245, 0.2);
-    border: 1px solid white;
-    border-radius: 50%;
-    padding: 0px;
-}
-
-.btn-delete {
-    font-size: 14px;
-    font-weight: normal;
-}
-
 .btn-like {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ED1D24;
-    border-radius: 50%;
-    padding: 4px;
+    flex: 0 0 auto;
+    font-size: 14px;
     box-sizing: border-box;
-    font-size: 10px;
-    line-height: 1;
-    white-space: nowrap;
 }
 
-.btn-like-icon {
-    display: inline-block;
-    line-height: 1;
-    font-size: 12px;
-}
-
-.btn-like-count {
-    display: inline-block;
-    line-height: 1;
+.like-delete .btn-delete button {
+    appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    color: inherit;
+    text-shadow: inherit;
+    font: inherit;
+    line-height: inherit;
+    text-align: center;
+    cursor: pointer;
 }
 
 .add-form {
@@ -336,6 +349,14 @@ input {
 
 .add-section .drop-zone input {
     display: none;
+}
+
+.add-section .drop-zone img,
+.add-section .drop-zone video {
+    max-height: 200px;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 8px;
 }
 
 .slider-block {

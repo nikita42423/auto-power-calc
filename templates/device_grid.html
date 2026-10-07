@@ -39,18 +39,15 @@
                 {% for device in devices %}
                     <div class="card">
                         <a href="/feed/{{ device.id_device }}" class="card-head">
-                            <img src="{{ device.image_url or '/static/img/default.png' }}" alt="{{ device.name }}" class="card-image">
+                            <img src="{{ device.image_url or '/static/media/img/default.png' }}" alt="{{ device.name }}" class="card-image">
                         </a>
                         <div class="card-body">
                             <p class="description-title">{{ device.power | fmt_num }} Вт | {{ device.resistance | fmt_num }} Ом</p>
                             <p>{{ device.name }}</p>
                             <div class="like-delete">
-                                <p class="btn-like">
-                                    <span class="btn-like-icon">👍</span>
-                                    <span class="btn-like-count">{{ like_counts.get(device.id_device, 0) }}</span>
-                                </p>
-                                <form action="/device/{{ device.id_device }}/delete" method="POST">
-                                    <button type="submit" class="btn btn-delete">Удалить</button>
+                                <span class="btn btn-like">👍{{ like_counts.get(device.id_device, 0) }}</span>
+                                <form class="btn btn-delete" action="/device/{{ device.id_device }}/delete" method="POST">
+                                    <button type="submit">Удалить</button>
                                 </form>
                             </div>
                         </div>

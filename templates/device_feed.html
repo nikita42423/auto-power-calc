@@ -21,64 +21,37 @@
                     </svg>
                 </div>
             </div>
-            <div class="content-area">
-                <h2>Новое устройство</h2>
-                {% if has_draft %}
-                <form action="/publish" method="POST" class="add-form">
-                    <div class="add-section">
-                        <p>Мощность (Вт)</p>
-                        <input type="number" name="power" value="{{ device.power | fmt_num }}" placeholder="Мощность">
-                        <p>Сопротивление (Ом)</p>
-                        <input type="number" name="resistance" value="{{ device.resistance | fmt_num }}" placeholder="Сопротивление">
-                        <p>Описание</p>
-                        <textarea name="description" rows="4" placeholder="Описание">{{ device.description }}</textarea>
+            <div class="content-area" style="padding: 0px; position: relative;">
+                <video class="video-layout" autoplay loop muted playsinline>
+                    <source src="{{ device.video_url or '/static/media/video/default.mp4' }}" type="video/mp4">
+                </video>
+                <div class="info-overlay">
+                    <div class="info-side">
+                        <div class="device-specs">
+                            <span class="chip">{{ device.power | fmt_num }} Вт</span>
+                            <span class="chip">{{ device.resistance | fmt_num }} Ом</span>
+                        </div>
+                        <div class="like-next">
+                            <a class="chip btn-like-next">👍<br>{{ like_count }}</a>
+                            <a class="chip btn-like-next" href="/feed/{{ device.id_device }}?next=true">➜</a>
+                        </div>
                     </div>
-                    <button type="submit" class="btn">Опубликовать</button>
-                </form>
-                {% else %}
-                <form action="/add" method="POST" class="add-form">
-                    <div class="add-section">
-                        <label class="drop-zone">
-                            <input type="file" accept="image/*">
-                            <span>📷<br>Изображение</span>
-                        </label>
-                        <label class="drop-zone">
-                            <input type="file" accept="video/*">
-                            <span>🎥<br>Видео</span>
-                        </label>
+                    <div class="description-text">
+                        <p class="line-clamp-1">{{ device.name }}</p>
+                        <p class="line-clamp-2">{{ device.description }}</p>
+                        <p>Еще</p>
                     </div>
-                    <div class="add-section">
-                        <p>Название</p>
-                        <input type="text" name="name" value="{{ device.name }}" placeholder="Название устройства">
-                    </div>
-                    <button type="submit" class="btn">Далее</button>
-                </form>
-                {% endif %}
+                </div>
             </div>
             <div class="tab-bar">
-                <a href="/feed" class="tab-btn">📱<br>Лента</a>
-                <div class="tab-btn tab-active">📝<br>Добавление</div>
+                <div class="tab-btn tab-active">📱<br>Лента</div>
+                <a href="/add" class="tab-btn">📝<br>Добавление</a>
                 <a href="/grid" class="tab-btn">📊<br>Плитка</a>
             </div>
             <div class="home-indicator">
                 <div class="indicator-line"></div>
             </div>
         </main>
-    <script>
-    document.querySelectorAll('.drop-zone input[type="file"]').forEach(input => {
-        input.addEventListener('change', e => {
-            const label = e.target.closest('label');
-            const url = URL.createObjectURL(e.target.files[0]);
-            const tag = e.target.accept.startsWith('video') ? 'video' : 'img';
-            const el = document.createElement(tag);
-            el.src = url;
-            if (tag === 'video') el.autoplay = el.loop = el.muted = true;
-            Object.assign(el.style, {maxHeight:'200px',width:'auto',objectFit:'contain',borderRadius:'inherit'});
-            label.querySelector('span').style.display = 'none';
-            const old = label.querySelector('img,video'); if(old) old.remove();
-            label.appendChild(el);
-        });
-    });
-    </script>
+
     </body>
 </html>

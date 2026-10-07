@@ -9,6 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy import select, func, text
 from sqlalchemy.ext.asyncio import AsyncSession
 from db.session import get_db
+from api.deps import CURRENT_USER_ID
 from models.device import Device
 from models.like import Like
 from models.user import User
@@ -23,8 +24,6 @@ def fmt_num(value):
     return s
 
 templates.env.filters["fmt_num"] = fmt_num
-
-CURRENT_USER_ID = 1
 
 
 @router.get("/feed")
@@ -77,7 +76,7 @@ async def get_feed(
 
     return templates.TemplateResponse(
         request=request,
-        name="feed.html",
+        name="device_feed.html",
         context={
             "device": device,
             "next_id": next_id,
@@ -101,7 +100,7 @@ async def get_add(
 
     return templates.TemplateResponse(
         request=request,
-        name="add.html",
+        name="device_add.html",
         context={
             "device": device,
             "has_draft": device is not None,
@@ -141,7 +140,7 @@ async def get_devices(
 
     return templates.TemplateResponse(
         request=request,
-        name="grid.html",
+        name="device_grid.html",
         context={
             "devices": devices,
             "like_counts": like_counts,
@@ -167,8 +166,8 @@ async def post_add(
 
     device = Device(
         name=name,
-        image_url="/static/img/default.png",
-        video_url="/static/video/default.mp4",
+        image_url="/static/media/img/default.png",
+        video_url="/static/media/video/default.mp4",
         power=None,
         resistance=None,
         description=None,

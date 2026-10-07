@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Form
+from fastapi import APIRouter, Depends, Form, Response
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from db.session import get_db
@@ -15,7 +15,7 @@ async def register(
 ):
     existing = await db.execute(select(User).where(User.username == username))
     if existing.scalar_one_or_none() is not None:
-        return {"error": "username taken"}
+        return Response(status_code=500)
 
     user = User(username=username, password=password)
     db.add(user)
