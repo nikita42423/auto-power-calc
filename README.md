@@ -41,12 +41,12 @@
 | Метод | URL | Описание |
 |-------|-----|----------|
 | GET | /api/devices?power_min=&power_max= | Список опубликованных с фильтрацией. Поле is_creator (0/1) — нужна ли кнопка удаления в плитке |
-| GET | /api/device/{id_device}?next=true | Лента по ид: устройство + like_count + is_liked (0/1 — лайкнул ли текущий пользователь). next=true — следующее после указанного (Если лента без ид, то id не передан → начало ленты (первое опубликованное) + like_count + is_liked)|
-| GET | /api/device/draft | Получить черновик текущего пользователя |
-| POST | /api/device | Создать черновик. Form: name, image (файл), video (файл) |
-| PUT | /api/device/{id_device} | Опубликовать. Form: power, resistance, description |
-| DELETE | /api/device/{id_device} | Soft delete (только свои). Ответ: 200, пустое тело |
-| POST | /api/device/{id_device} | Лайк. Form: like (1=поставить, 0=отменить) |
+| GET | /api/devices/feed?id_device=&next=true | Лента: устройство + like_count + is_liked. Без id — первое опубликованное; с id_device — это устройство; next=true — следующее |
+| GET | /api/devices/draft | Получить черновик текущего пользователя |
+| POST | /api/devices | Создать черновик. Form: name, image (файл), video (файл) |
+| PUT | /api/devices/{id_device} | Опубликовать. Form: power, resistance, description |
+| DELETE | /api/devices/{id_device} | Soft delete (только свои). Ответ: 200, пустое тело |
+| POST | /api/devices/{id_device}/likes | Лайк. Form: like (1=поставить, 0=отменить) |
 
 ### Домен пользователя
 
