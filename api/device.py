@@ -141,6 +141,7 @@ async def get_draft(
 
 @router.post(
     "",
+    status_code=201,
     summary="Добавить услугу (создание черновика с картинкой и видео)",
     description=(
         "Метод создателя: создаёт устройство со статусом «черновик», "
@@ -150,7 +151,7 @@ async def get_draft(
         "Требуется авторизация; для гостя — 401."
     ),
     responses={
-        200: {"description": "Черновик создан"},
+        201: {"description": "Черновик создан"},
         401: {"description": "Не аутентифицирован"},
         409: {"description": "У пользователя уже есть черновик"},
     },
@@ -268,11 +269,11 @@ async def delete_device(
     summary="Поставить/снять лайк",
     description=(
         "Метод аутентифицированного пользователя: like=1 — поставить лайк, "
-        "like=0 — снять. Возвращает актуальный like_count. "
+        "like=0 — снять. Возвращает актуальные like_count и is_liked. "
         "Требуется авторизация; для гостя — 401."
     ),
     responses={
-        200: {"description": "Актуальное количество лайков"},
+        200: {"description": "Актуальные like_count и is_liked"},
         401: {"description": "Не аутентифицирован"},
     },
 )
@@ -299,4 +300,4 @@ async def like_device(
     count_result = await db.execute(
         select(func.count()).select_from(Like).where(Like.id_device == id_device)
     )
-    return {"like_count": count_result.scalar_one()}
+    return {"like_count": count_result.scalar_one(), "is_liked": 1 if like == 1 else 0}
