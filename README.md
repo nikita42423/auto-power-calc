@@ -53,5 +53,5 @@
 | Метод | URL | Описание |
 |-------|-----|----------|
 | POST | /api/register | Регистрация. Form: username, password |
-| POST | /api/login | Аутентификация (заглушка) |
-| POST | /api/logout | Деавторизация (заглушка) |
+| POST | /api/login | Аутентификация |
+| POST | /api/logout | Деавторизация |
